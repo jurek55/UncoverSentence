@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import Keyboard from './components/Keyboard';
+import HideSentence from './components/HideSentence';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class Szubienica extends React.Component {
+  state = { 
+    litera: '',
+    sentence: 'klub pickwika'
+   }
+   ChangeLitera=(znak)=>{
+    this.setState({
+      litera: znak
+    })
+  }
+  render() { 
+    
+    return ( 
+      <React.Fragment>
+        <Keyboard change={this.ChangeLitera}/>
+        <div className='showletter'>{this.state.litera}</div>
+        <div className='sentence'><HideSentence sentence={this.state.sentence}/></div>
+      </React.Fragment>
+     );
+  }
 }
-
-export default App;
+ 
+export default Szubienica;
+ 
