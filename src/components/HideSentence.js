@@ -14,8 +14,10 @@ const HideSentence = ({sentence}) => {
             hiddenSentence=hiddenSentence +' ';
     }
 
-    return ( 
-        <div>{hiddenSentence}</div>
+    return (
+        <React.Fragment>
+            {hiddenSentence}
+        </React.Fragment>
      );
 }
 export default HideSentence;

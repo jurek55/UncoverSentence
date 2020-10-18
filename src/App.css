@@ -1,52 +1,82 @@
-body {
-  width: 100vw;
+:root {
+  --key-dimension: 50px;
+  --keyboard-margin: 5px;
 }
-.keyboard {
-  width: 50%  ;
-  margin: 0 auto;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: lightgrey;
+}
+.wraper {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  background-color: grey;
+  align-items: stretch;
+  height: 100vh;
   
 }
+.keyboard {
+  background-color: red;
+  flex-grow: 1;
+  flex-basis: 50%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.keys {
+  flex-basis: 100%;
+}
 .letter {
+  box-sizing: border-box;
   background-color: green;
   color:white;
   float: left;
-  width: 30px;
-  height: 30px;
+  width: var(--key-dimension);
+  height: var(--key-dimension);
   border: 1px solid white;
   text-align: center;
-  line-height: 200%;
+  line-height: 100%;
   cursor: pointer;
-  margin: 5px;
+  margin: var(--keyboard-margin);
+  font-size: calc(var(--key-dimension)/2);
+  padding: 10px;
 }
 .break {
   clear: both;
 }
 .showletter {
   font-size: 50px;
-  width: 60px;
-  height: 60px;
-  margin: 100px auto;
   font-weight: 1000;
   font-size: 100px;
-  background-color: green;
   color: white;
-  width: 150px;
-  height: 150px;
   line-height: 150%;
   text-align: center;
+  background-color: blue;
+  flex-grow: 1;
+  flex-basis: 100%;
 }
 .number {
+  box-sizing: border-box;
   background-color: black;
   color:white;
   float: left;
-  width: 30px;
-  height: 30px;
+  width: var(--key-dimension);
+  height: var(--key-dimension);
   border: 1px solid white;
   text-align: center;
-  line-height: 200%;
+  line-height: 100%;
   cursor: pointer;
-  margin: 5px;
+  margin: var(--keyboard-margin);
+  font-size: calc(var(--key-dimension)/2);
+  padding: 10px;
 }
 .sentence {
   font-size: 40px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: yellow;
+  flex-grow: 1;
+  flex-basis: 50%;
 }

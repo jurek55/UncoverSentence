@@ -6,20 +6,23 @@ import './App.css';
 class Szubienica extends React.Component {
   state = { 
     litera: '',
-    sentence: 'klub pickwika'
+    sentence: 'świnka pepa'
    }
-   ChangeLitera=(znak)=>{
+   AddLetter=(znak)=>{
+     const word =this.state.litera + znak;
     this.setState({
-      litera: znak
+      litera: word
     })
   }
   render() { 
     
     return ( 
       <React.Fragment>
-        <Keyboard change={this.ChangeLitera}/>
-        <div className='showletter'>{this.state.litera}</div>
-        <div className='sentence'><HideSentence sentence={this.state.sentence}/></div>
+        <div className="wraper">
+          <Keyboard add={this.AddLetter}/>
+          <div className='sentence'><HideSentence sentence={this.state.sentence}/></div>
+          <div className='showletter'>{this.state.litera}</div>
+        </div>
       </React.Fragment>
      );
   }
