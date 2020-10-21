@@ -10,7 +10,7 @@ class UncoverSentence extends React.Component {
   super(props);
   this.state = { 
     litera: '',
-    tab: [{sentence: 'świnka pepa', cover: 'Ś----- ----'},
+    tab: [{sentence: 'świnka pepa', cover: ''},
           {sentence: 'psi patrol', cover: ''},
           {sentence: 'o dwóch takich co ukradli księżyc', cover: ''}],
     uncovering: ''
@@ -53,8 +53,7 @@ class UncoverSentence extends React.Component {
   }
   
   render() { 
-
-    console.log(this.state);
+    
     return ( 
       <React.Fragment>
         <div className="wraper">

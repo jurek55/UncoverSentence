@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Keyboard = (props) => {
-    console.log(props.data.litera, props.data.uncovering);
     
     const letters =['a', 'ą', 'b', 'c', 'ć', 'd','e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p' ,'q', 'r', 's', 'ś', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ź', 'ż', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const Letters = letters.map((element)=>{ return element.toUpperCase()});
@@ -13,7 +12,6 @@ const Keyboard = (props) => {
             tekst = tekst.substring(0,i) + event.target.innerHTML + tekst.substring(i+1,props.data.tab[0].sentence.length);
             };
         };
-        console.log('dupa', tekst);
         props.uncover(tekst);
         props.add(event.target.innerHTML);
     };
