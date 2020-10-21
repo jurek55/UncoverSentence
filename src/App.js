@@ -13,7 +13,8 @@ class UncoverSentence extends React.Component {
     tab: [{sentence: 'świnka pepa', cover: ''},
           {sentence: 'psi patrol', cover: ''},
           {sentence: 'o dwóch takich co ukradli księżyc', cover: ''}],
-    uncovering: ''
+    uncovering: '',
+    number: ''
     };
 };
  
@@ -29,10 +30,13 @@ class UncoverSentence extends React.Component {
       tabCopy[j].cover = hidden;
       tabCopy[j].sentence=tabCopy[j].sentence.toUpperCase();
     };
+    const number = this.DrawSentence()-1;
     this.setState({
       tab: tabCopy,
-      uncovering: tabCopy[0].cover
+      number,
+      uncovering: tabCopy[number].cover
     })
+    
   };
   setUncoveringSentence = (param) => {
       this.setState({
@@ -51,9 +55,12 @@ class UncoverSentence extends React.Component {
       litera: word
     })
   }
+  DrawSentence = () => {
+    const number = Math.ceil(Math.random()*3);
+    return number;
+  };
   
   render() { 
-    
     return ( 
       <React.Fragment>
         <div className="wraper">
