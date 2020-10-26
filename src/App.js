@@ -18,7 +18,8 @@ class UncoverSentence extends React.Component {
           {sentence: 'władysław jagiełło', cover: '', category: 'król polski', picture: 'jagiello', task: 'imię i nazwisko postaci'},
           {sentence: 'gwiaździsta noc', cover: '', category: 'malarstwo - impresjonizm', picture: 'vangogh', task: 'tytuł obrazu'}],
     uncovering: '',
-    number: ''
+    number: '',
+    olderItems: []
     };
 };
  
@@ -34,7 +35,7 @@ class UncoverSentence extends React.Component {
       tabCopy[j].cover = hidden;
       tabCopy[j].sentence=tabCopy[j].sentence.toUpperCase();
     };
-    const number = this.DrawSentence()-1;
+    const number = this.DrawSentence();
     this.setState({
       tab: tabCopy,
       number,
@@ -42,6 +43,19 @@ class UncoverSentence extends React.Component {
     })
     
   };
+  CoverSentence = () => {
+    let tabCopy = this.state.tab;
+    for (let j=0; j<tabCopy.length; j++){
+      let hidden = '';
+      for (let i=0; i<tabCopy[j].sentence.length; i++)
+        if (tabCopy[j].sentence[i] !== ' ')
+          hidden = hidden + '-';
+        else
+          hidden = hidden + ' ';
+      tabCopy[j].cover = hidden;
+      tabCopy[j].sentence=tabCopy[j].sentence.toUpperCase();
+    };
+  }
   setUncoveringSentence = (param) => {
       this.setState({
         uncovering: param
@@ -68,11 +82,45 @@ class UncoverSentence extends React.Component {
   }
   
   DrawSentence = () => {
-    const number = Math.ceil(Math.random()*this.state.tab.length);
-    return number;
-  };
-  
+   const olderItems = [...this.state.olderItems];
+   const olderItemsLength = olderItems.length;
+
+   let number = this.state.number;
+    if (olderItems.length === 0){
+      number = Math.ceil(Math.random()*this.state.tab.length);
+      olderItems[0] = number-1;
+      this.setState({
+      olderItems
+      })
+      return number-1;
+    } else {
+      
+      do {
+        let flag = 0;
+        var isSet = true;
+        number = Math.ceil(Math.random()*this.state.tab.length);
+        for (let i=0; i<olderItemsLength; i++){
+          if (olderItems[i] === number-1){
+            flag++; console.log(flag);
+          }
+        }
+          if (olderItemsLength === this.state.tab.length)
+            isSet = false;
+          if (flag === 0){
+              olderItems[olderItemsLength] = number-1;
+              this.setState({
+                olderItems,
+                number: number-1
+              })
+              isSet = false;
+              return number-1;
+          };
+          
+      } while (isSet);
+    };
+  }
   render() { 
+    console.log(this.state.olderItems);
     console.log(this.state.number);
     return ( 
       <React.Fragment>
@@ -81,7 +129,7 @@ class UncoverSentence extends React.Component {
           <div className='top-menu'>
               <div className="menu-button">ZASADY</div>
               <div className="menu-button">START</div>
-              <div className="menu-button">LOSUJ NOWE</div>
+              <div className="menu-button" onClick={this.DrawSentence}>LOSUJ NOWE</div>
               <div className="menu-button">PODPOWIEDŹ</div>
           </div>
           {this.state.number !=='' && <p className='header'>{`ODGADNIJ: ${this.state.tab[this.state.number].task}`}</p>}
