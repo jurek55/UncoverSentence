@@ -6,7 +6,7 @@ import React from 'react';
     return ( 
         
         <React.Fragment>
-            {props.data.uncovering}
+            {props.data.tab[props.data.number].cover}
             {props.data.number !== '' && <div className='category'>{`kategoria: ${props.data.tab[props.data.number].category}`}</div>}
         </React.Fragment>
      );

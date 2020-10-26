@@ -2,18 +2,20 @@ import React from 'react';
 
 const Keyboard = (props) => {
     const nr = props.data.number;
+    let copyTab = [...props.data.tab];
     console.log(nr);
+
     const letters =['a', 'ą', 'b', 'c', 'ć', 'd','e', 'ę', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'ł', 'm', 'n', 'ń', 'o', 'ó', 'p' ,'q', 'r', 's', 'ś', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'ź', 'ż', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const Letters = letters.map((element)=>{ return element.toUpperCase()});
-    let newTekst = props.data.uncovering;
+    
     const handleOnClick=(event)=>{
-    for (let i=0; i<props.data.tab[nr].sentence.length; i++){
+    for (let i=0; i<copyTab[nr].sentence.length; i++){
         
-        if (props.data.tab[nr].sentence[i] === event.target.innerHTML){
-            newTekst = newTekst.substring(0,i) + event.target.innerHTML + newTekst.substring(i+1,props.data.tab[nr].sentence.length);
+        if (copyTab[nr].sentence[i] === event.target.innerHTML){
+            copyTab[nr].cover = copyTab[nr].cover.substring(0,i) + event.target.innerHTML + copyTab[nr].cover.substring(i+1,copyTab[nr].sentence.length);
             };
         };
-        props.uncover(newTekst);
+        props.uncover(copyTab);
         props.add(event.target.innerHTML);
     };
     

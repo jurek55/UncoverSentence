@@ -10,14 +10,13 @@ class UncoverSentence extends React.Component {
   super(props);
   this.state = { 
     litera: '',
-    tab: [{sentence: 'świnka pepa', cover: '', category: 'film dla dzieci', picture: 'pepa', task: 'tytuł filmu'},
-          {sentence: 'psi patrol', cover: '', category: 'film dla dzieci', picture: 'psipatrol', task: 'tytuł filmu'},
-          {sentence: 'o dwóch takich co ukradli księżyc', cover: '', category: 'tytuł filmu', picture: 'odwochtakich', task: 'tytuł filmu'},
-          {sentence: '101 dalmatyńczyków', cover: '', category: 'tytuł filmu', picture: 'dalmatynczyki', task: 'tytuł filmu'},
-          {sentence: 'trzej muszkieterowie', cover: '', category: 'tytuł książki', picture: 'muszkieterowie', task: 'tytuł filmu'},
-          {sentence: 'władysław jagiełło', cover: '', category: 'król polski', picture: 'jagiello', task: 'imię i nazwisko postaci'},
-          {sentence: 'gwiaździsta noc', cover: '', category: 'malarstwo - impresjonizm', picture: 'vangogh', task: 'tytuł obrazu'}],
-    uncovering: '',
+    tab: [{id: 1,sentence: 'świnka pepa', cover: '', category: 'film dla dzieci', picture: 'pepa', task: 'tytuł filmu'},
+          {id: 2,sentence: 'psi patrol', cover: '', category: 'film dla dzieci', picture: 'psipatrol', task: 'tytuł filmu'},
+          {id: 3,sentence: 'o dwóch takich co ukradli księżyc', cover: '', category: 'tytuł filmu', picture: 'odwochtakich', task: 'tytuł filmu'},
+          {id: 4,sentence: '101 dalmatyńczyków', cover: '', category: 'tytuł filmu', picture: 'dalmatynczyki', task: 'tytuł filmu'},
+          {id: 5,sentence: 'trzej muszkieterowie', cover: '', category: 'tytuł książki', picture: 'muszkieterowie', task: 'tytuł filmu'},
+          {id: 6,sentence: 'władysław jagiełło', cover: '', category: 'król polski', picture: 'jagiello', task: 'imię i nazwisko postaci'},
+          {id: 7,sentence: 'gwiaździsta noc', cover: '', category: 'malarstwo - impresjonizm', picture: 'vangogh', task: 'tytuł obrazu'}],
     number: '',
     olderItems: []
     };
@@ -58,7 +57,7 @@ class UncoverSentence extends React.Component {
   }
   setUncoveringSentence = (param) => {
       this.setState({
-        uncovering: param
+        tab: param
       })
   };
   AddLetter = (znak) => {
@@ -71,9 +70,11 @@ class UncoverSentence extends React.Component {
     const word = this.state.litera.slice(0,lengthLitera);
     let tab1 = [...this.state.uncovering];
     const uncoveringLength = tab1.length;
+
     for (let i=0; i<uncoveringLength; i++)
       if (tab1[i] === this.state.litera)
         tab1[i] = '-';
+
     const uncovering = tab1.join('');
     this.setState({
       litera: word,
@@ -120,8 +121,7 @@ class UncoverSentence extends React.Component {
     };
   }
   render() { 
-    console.log(this.state.olderItems);
-    console.log(this.state.number);
+   
     return ( 
       <React.Fragment>
         
@@ -132,12 +132,11 @@ class UncoverSentence extends React.Component {
               <div className="menu-button" onClick={this.DrawSentence}>LOSUJ NOWE</div>
               <div className="menu-button">PODPOWIEDŹ</div>
           </div>
-          {this.state.number !=='' && <p className='header'>{`ODGADNIJ: ${this.state.tab[this.state.number].task}`}</p>}
 
-          {/* <button onClick={this.CoverSentence}>losuj</button> */}
-    {this.state.number !=='' && <div className='showletter' id={this.state.tab[this.state.number].picture}>{/* <div className='content'>{`Zasady: `}<br/>{`Odgadnij losowo wybrane hasło z podanej kategorii. Sukcesem jest odgadnięcie pełnego brzmienia hasła przy - co najwyżej - 10. błędnych kliknięciach. Jako błędne kliknięcie liczone jest także - pomyłkowe - kliknięcie już wybranej litery ponownie. Litery hasła wprowadzamy z klawiatury ekranowej.`}</div> */}</div>}
+          {this.state.number !=='' && <p className='header'>{`ODGADNIJ: ${this.state.tab[this.state.number].task}`}</p>}
+          {this.state.number !=='' && <div className='showletter' id={this.state.tab[this.state.number].picture}></div>}
           <Keyboard add={this.AddLetter} subtract={this.SubtractLetter} data={this.state} uncover={this.setUncoveringSentence}/>
-          <div className='hiden-sentence'><DisplayUncover data={this.state}/></div>
+          {this.state.number !=='' && <div className='hiden-sentence'><DisplayUncover data={this.state}/></div>}
         </div>
       </React.Fragment>
      );
